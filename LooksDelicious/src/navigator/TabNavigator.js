@@ -1,11 +1,11 @@
 // import React from 'react';
 import { createBottomTabNavigator } from 'react-navigation';
-import TabIndexOne from '../screens/TabIndexOne';
+import TabCookScreen from '../screens/TabCookScreen';
 import TabIndexTwo from '../screens/TabIndexTwo';
 import TabIndexThree from '../screens/TabIndexThree';
 
 const TabNavigator = createBottomTabNavigator({
-  one: TabIndexOne,
+  Cook: TabCookScreen,
   two: TabIndexTwo,
   three: TabIndexThree,
 });

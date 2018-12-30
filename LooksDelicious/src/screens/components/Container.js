@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import { StyleSheet, View, ScrollView } from "react-native";
-import PropTypes from "prop-types";
-import UI from "../../UI";
+import React, { Component } from 'react';
+import { StyleSheet, View, ScrollView } from 'react-native';
+import PropTypes from 'prop-types';
+import UI from '../../UI';
 
 export default class Container extends Component {
   shouldComponentUpdate(nextProps) {
@@ -13,7 +13,7 @@ export default class Container extends Component {
   };
 
   render() {
-    console.debug("[render] Container");
+    console.debug('[render] Container');
     const { scroll, padding, children, style, bgStyle, ...others } = this.props;
     if (scroll) {
       return (
@@ -22,12 +22,12 @@ export default class Container extends Component {
           ref={a => (this.scroll = a)}
           style={[
             { flex: 1, backgroundColor: UI.color.bg1 },
-            !!bgStyle && bgStyle
+            !!bgStyle && bgStyle,
           ]}
           contentContainerStyle={[
             styles.scroll,
             !!padding && styles.padding,
-            !!style && style
+            !!style && style,
           ]}
         >
           {children}
@@ -75,7 +75,7 @@ export default class Container extends Component {
 
 Container.propTypes = {
   padding: PropTypes.bool,
-  scroll: PropTypes.bool
+  scroll: PropTypes.bool,
   // FIXME: children 没声明类型可能是数组可能是对象
   // children: PropTypes.object,
   // style: PropTypes.number,
@@ -85,22 +85,22 @@ Container.defaultProps = {
   padding: false,
   scroll: false,
   children: null,
-  style: null
+  style: null,
 };
 
 const styles = StyleSheet.create({
   scroll: {
     backgroundColor: UI.color.bg1,
-    paddingBottom: UI.IS_IPHONE_X ? 24 : 0
+    paddingBottom: UI.IS_IPHONE_X ? 24 : 0,
   },
   view: {
     flex: 1,
     backgroundColor: UI.color.bg1,
-    paddingBottom: UI.unit * 4 + (UI.IS_IPHONE_X ? 24 : 0)
+    paddingBottom: UI.unit * 4 + (UI.IS_IPHONE_X ? 24 : 0),
   },
   padding: {
     paddingHorizontal: UI.unit * 4,
     paddingTop: UI.unit * 2,
-    paddingBottom: UI.unit * 4 + (UI.IS_IPHONE_X ? 24 : 0)
-  }
+    paddingBottom: UI.unit * 4 + (UI.IS_IPHONE_X ? 24 : 0),
+  },
 });
