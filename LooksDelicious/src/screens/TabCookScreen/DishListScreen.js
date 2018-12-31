@@ -42,7 +42,11 @@ export default class DishListScreen extends Component<{}> {
     <DishItem
       data={item}
       onPress={() => {
-        console.log('1111', item);
+        this.props.navigation.navigate('stepList', {
+          title: item.title,
+          steps: item.steps,
+        });
+        console.log('1111', item.steps);
       }}
     />
   );
