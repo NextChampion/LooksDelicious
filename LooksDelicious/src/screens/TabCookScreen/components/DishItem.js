@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Text } from 'react-native';
-import { ListItem, Left, Right, Icon } from 'native-base';
+import { ListItem, Thumbnail, Body, Left, Right, Text } from 'native-base';
 import PropTypes from 'prop-types';
 
 export default class DishItem extends Component<{}> {
@@ -22,13 +21,14 @@ export default class DishItem extends Component<{}> {
   render() {
     const { data, onPress } = this.props;
     return (
-      <ListItem selected onPress={onPress}>
-        <Left>
+      <ListItem thumbnail onPress={onPress}>
+        <Thumbnail square source={{ uri: data.albums[0] }} />
+        <Body>
           <Text>{data.title}</Text>
-        </Left>
-        <Right>
-          <Icon name="arrow-forward" />
-        </Right>
+          <Text note numberOfLines={3} style={{ marginTop: 6, fontSize: 12 }}>
+            {data.imtro}
+          </Text>
+        </Body>
       </ListItem>
     );
   }

@@ -1,14 +1,51 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, FlatList } from 'react-native';
+import { StyleSheet, Image, FlatList } from 'react-native';
+import { CardItem, Card, Body, Text } from 'native-base';
 
-import Loading from '../components/Loading';
 import Container from '../../components/Container';
 import StepItem from './components/StepItem';
+import UI from '../../UI';
 
 export default class DishListScreen extends Component<{}> {
   static navigationOptions = ({ navigation }) => ({
     title: `${navigation.state.params.title}`,
   });
+
+  renderHeader = () => {
+    const {
+      albums,
+      burden,
+      ingredients,
+      tags,
+      imtro,
+    } = this.props.navigation.state.params;
+    return (
+      <Card>
+        <CardItem cardBody>
+          <Image
+            source={{ uri: albums[0] }}
+            style={{ height: UI.size.screenWidth - 10, width: null, flex: 1 }}
+          />
+        </CardItem>
+        <CardItem>
+          <Body>
+            <Text note style={{ fontSize: 12 }}>
+              标签: {tags}
+            </Text>
+            <Text style={{ fontSize: 12, marginTop: 6, marginBottom: 6 }}>
+              介绍: {imtro}
+            </Text>
+            <Text style={{ marginTop: 12, fontSize: 12 }}>
+              主料: {ingredients}
+            </Text>
+            <Text note style={{ fontSize: 12 }}>
+              辅料: {burden}
+            </Text>
+          </Body>
+        </CardItem>
+      </Card>
+    );
+  };
 
   renderItem = ({ item }) => <StepItem data={item} />;
 
@@ -20,6 +57,7 @@ export default class DishListScreen extends Component<{}> {
           data={steps || []}
           keyExtractor={item => item.img}
           renderItem={this.renderItem}
+          ListHeaderComponent={this.renderHeader}
         />
       </Container>
     );

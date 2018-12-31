@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Text, Image } from 'react-native';
-import { CardItem, Card, Body } from 'native-base';
+import { Image } from 'react-native';
+import { CardItem, Card, Body, Text } from 'native-base';
 import PropTypes from 'prop-types';
 
 export default class StepItem extends Component<{}> {
@@ -20,7 +20,7 @@ export default class StepItem extends Component<{}> {
   render() {
     const { data } = this.props;
     return (
-      <Card>
+      <Card style={{ marginHorizontal: 12 }}>
         <CardItem cardBody>
           <Image
             source={{ uri: data.img }}
