@@ -17,8 +17,8 @@ class TabCookScreen extends Component<{}> {
     data: [],
   };
 
-  componentWillMount() {
-    console.log('componentWillMount getData', this.props);
+  componentDidMount() {
+    console.log('componentDidMount getData', this.props);
     // this.onRefresh();
   }
 

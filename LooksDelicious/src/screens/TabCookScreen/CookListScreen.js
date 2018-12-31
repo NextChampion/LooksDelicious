@@ -15,7 +15,10 @@ export default class CookListScreen extends Component<{}> {
   renderItem = ({ item }) => (
     <ListItem
       selected
-      onPress={() => this.props.navigation.navigate('cookList', item)}
+      onPress={() => {
+        console.log('1111', item.toJS());
+        this.props.navigation.navigate('dishList', item);
+      }}
     >
       <Left>
         <Text>{item.get('name')}</Text>

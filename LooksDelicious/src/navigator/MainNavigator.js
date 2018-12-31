@@ -1,9 +1,11 @@
 import { createStackNavigator } from 'react-navigation';
 
 import CookListScreen from '../screens/TabCookScreen/CookListScreen';
+import DishListScreen from '../screens/TabCookScreen/DishListScreen';
 import Tab from './TabNavigator';
 
 export default createStackNavigator({
   main: Tab,
   cookList: CookListScreen,
+  dishList: DishListScreen,
 });
