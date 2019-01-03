@@ -38,15 +38,6 @@ const TabNavigator = createBottomTabNavigator(
             source = require('./tabImages/cook_unselected.png');
           }
         }
-        // if (routeName === 'Home') {
-        //   iconName = `ios-information-circle${focused ? '' : '-outline'}`;
-        //   // Sometimes we want to add badges to some icons.
-        //   // You can check the implementation below.
-        // } else if (routeName === 'Settings') {
-        //   iconName = `ios-options${focused ? '' : '-outline'}`;
-        // }
-
-        // You can return any component that you like here!
         return <Image source={source} style={{ width: 26, height: 26 }} />;
       },
     }),

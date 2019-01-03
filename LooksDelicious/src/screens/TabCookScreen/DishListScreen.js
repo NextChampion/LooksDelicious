@@ -28,10 +28,8 @@ export default class DishListScreen extends Component<{}> {
     try {
       response = await server.getDataOfTag(id);
     } catch (e) {
-      console.log('getDataOfTag', e);
       this.setState({ loaded: true });
     }
-    console.log('getDataOfTag result11', response.result.data);
     this.setState({
       loaded: true,
       data: response.result.data,
@@ -70,21 +68,4 @@ export default class DishListScreen extends Component<{}> {
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
+const styles = StyleSheet.create({});

@@ -32,10 +32,8 @@ class TabCookScreen extends Component<{}> {
     try {
       response = await server.getAllTags();
     } catch (e) {
-      console.log('eeee', e);
       this.setState({ refreshing: false });
     }
-    console.log('result11', response.result);
     dispatch('UPDATE_COOK', response.result);
     this.setState({
       refreshing: false,
@@ -60,7 +58,6 @@ class TabCookScreen extends Component<{}> {
   render() {
     const { cook } = this.props;
     const data = cook.get('list').toArray();
-    console.log('data', data);
     const { refreshing } = this.state;
     return (
       <Container style={{ paddingBottom: 0 }}>

@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, ScrollView } from 'react-native';
+import { StyleSheet, ScrollView } from 'react-native';
 import PropTypes from 'prop-types';
 import UI from '../../UI';
 
 export default class Container extends Component {
   shouldComponentUpdate(nextProps) {
-    return this.props.children !== nextProps.children;
+    const { children } = this.props;
+    return children !== nextProps.children;
   }
 
   scrollTo = offSet => {

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ListItem, Thumbnail, Body, Left, Right, Text } from 'native-base';
+import { ListItem, Thumbnail, Body, Text } from 'native-base';
 import PropTypes from 'prop-types';
 
 export default class DishItem extends Component<{}> {

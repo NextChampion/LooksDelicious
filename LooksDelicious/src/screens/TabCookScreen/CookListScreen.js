@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, FlatList } from 'react-native';
+import { StyleSheet, Text, FlatList } from 'react-native';
 import { ListItem, Left, Right, Icon } from 'native-base';
 
 import Loading from '../components/Loading';
@@ -16,7 +16,6 @@ export default class CookListScreen extends Component<{}> {
     <ListItem
       selected
       onPress={() => {
-        console.log('1111', item.toJS());
         this.props.navigation.navigate('dishList', item);
       }}
     >
@@ -31,7 +30,6 @@ export default class CookListScreen extends Component<{}> {
 
   render() {
     const data = this.props.navigation.state.params;
-    console.log('1111', data.toJS());
     // return <Loading />;
     return (
       <Container style={{ paddingBottom: 0 }}>
@@ -45,21 +43,4 @@ export default class CookListScreen extends Component<{}> {
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
+const styles = StyleSheet.create({});
