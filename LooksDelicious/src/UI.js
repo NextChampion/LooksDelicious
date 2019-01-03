@@ -16,11 +16,16 @@ if (IS_IPHONE_PLUS) {
 }
 
 const color = {
-  primary1: '#5574FF',
+  primary1: '#ed717c',
+  unselected: '#cdcdcd',
   border: '#D8D7DC',
   disable: '#E6EFFA',
   bg1: '#FFFFFF', // '#FCFDFF',
   black: '#1f2233',
+  green1: '#add56b',
+  yellow1: '#f9d35b',
+  purple: '#a466af',
+  red1: '#ed6474',
   black1: '#453E56',
   white1: '#FFFFFF',
   gray2: '#2F405085',
