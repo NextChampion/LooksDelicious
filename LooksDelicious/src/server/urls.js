@@ -1,5 +1,5 @@
-const appKey = "4043aa123946f1b798482cf2df6cc383";
-const BASE_URL = "http://apis.juhe.cn";
+const appKey = '4043aa123946f1b798482cf2df6cc383';
+const BASE_URL = 'http://apis.juhe.cn';
 
 export const MENU = `${BASE_URL}/cook/query?key=${appKey}`;
 

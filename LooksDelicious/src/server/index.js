@@ -26,10 +26,10 @@ export default {
     return res.data;
   },
 
-  async getDataOfKey(key) {
-    console.log('getDataOfKey', key);
-    const url = `${MENU}&key=${key}`;
-    const res = axios.get(url);
+  async searchWithKey(key) {
+    console.log('searchWithKey', key);
+    const url = `${MENU}&menu=${key}`;
+    const res = await axios.get(url);
     console.log('res', res);
     return res.data;
   },
