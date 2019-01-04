@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, FlatList } from 'react-native';
+import { Text, FlatList, View } from 'react-native';
 import {
   Container,
   ListItem,
@@ -19,6 +19,8 @@ import { dispatch, connect } from '../redux';
 import UI from '../UI';
 
 import SearchBar from './TabCookScreen/components/SearchBar';
+import DishItem from './TabCookScreen/components/DishItem';
+import RecentSearch from './components/RecentSearch';
 
 @connect(['search'])
 class SearchScreen extends Component<{}> {
@@ -29,7 +31,10 @@ class SearchScreen extends Component<{}> {
   textInput = '';
 
   componentDidMount() {
+    const { search } = this.props;
+
     console.log('search.props', this.props);
+    console.log('search recent', search.get('recent').toArray());
     // this.onRefresh();
   }
 
@@ -53,6 +58,7 @@ class SearchScreen extends Component<{}> {
       return;
     }
     let result;
+    dispatch('ADD_RECENT_SEARCK_KEY', { key });
     try {
       result = await server.searchWithKey(key);
     } catch (e) {
@@ -74,24 +80,32 @@ class SearchScreen extends Component<{}> {
   // title: "可乐鸡翅"
 
   renderItem = ({ item }) => (
-    <ListItem
-      selected
+    <DishItem
+      data={item}
       onPress={() => {
-        const { navigation } = this.props;
-        navigation.navigate('cookList', item);
+        this.props.navigation.navigate('stepList', item);
       }}
-    >
-      <Left>
-        <Text>{item.title}</Text>
-      </Left>
-      <Right>
-        <Icon name="arrow-forward" />
-      </Right>
-    </ListItem>
+    />
   );
 
-  render() {
+  renderContent = () => {
+    const { search } = this.props;
     const { data } = this.state;
+    const recent = search.get('recent').toArray();
+    console.log('recent', recent);
+    if (data.length) {
+      return (
+        <FlatList
+          data={data || []}
+          keyExtractor={item => item.id}
+          renderItem={this.renderItem}
+        />
+      );
+    }
+    return <RecentSearch recent={recent} />;
+  };
+
+  render() {
     return (
       <Container style={{ paddingBottom: 0 }}>
         <Header
@@ -123,11 +137,7 @@ class SearchScreen extends Component<{}> {
             <Text>Cancel</Text>
           </Button>
         </Header>
-        <FlatList
-          data={data || []}
-          keyExtractor={item => item.id}
-          renderItem={this.renderItem}
-        />
+        {this.renderContent()}
       </Container>
     );
   }

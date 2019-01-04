@@ -32,6 +32,35 @@ export const dishes = {
   },
 };
 
+export const search = {
+  default: Immutable.fromJS({
+    recent: [],
+    hot: [],
+  }),
+  persist: true,
+  actions: {
+    ADD_RECENT_SEARCK_KEY: {
+      reducer: (state, { payload }) => {
+        // TODO: 每次最新点击的数据,挪到最前面
+        const index = state
+          .get('recent')
+          .findKey(a => a.get('key') === payload.key);
+        if (typeof index !== 'undefined') {
+          const list = state
+            .get('recent')
+            .filter((a, ind) => a.get('key') !== payload.key && ind < 10);
+          return state.setIn('recent', list.unshift(Immutable.fromJS(payload)));
+        }
+        const list = state.get('recent').filter((a, ind) => ind < 10);
+        return state.set('recent', list.unshift(Immutable.fromJS(payload)));
+      },
+    },
+    CLEAR_DISHES: {
+      reducer: () => Immutable.fromJS({}),
+    },
+  },
+};
+
 export const cook = {
   default: Immutable.fromJS({}),
   persist: true,
