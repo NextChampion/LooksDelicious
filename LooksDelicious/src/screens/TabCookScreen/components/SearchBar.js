@@ -6,11 +6,13 @@ export default class SearchBar extends Component<{}> {
   static propTypes = {
     data: PropTypes.object,
     onPress: PropTypes.func,
+    editable: PropTypes.bool,
   };
 
   static defaultProps = {
     data: {},
     onPress: null,
+    editable: true,
   };
 
   shouldComponentUpdate(props) {
@@ -19,11 +21,19 @@ export default class SearchBar extends Component<{}> {
   }
 
   render() {
-    const { data, onPress } = this.props;
+    const { data, onPress, editable, ...others } = this.props;
+    if (!editable) {
+      return (
+        <Item onPress={onPress}>
+          <Icon name="ios-search" />
+          <Text>Search</Text>
+        </Item>
+      );
+    }
     return (
       <Item>
         <Icon name="ios-search" />
-        <Input placeholder="Search" {...this.props} />
+        <Input placeholder="Search" {...others} />
       </Item>
     );
   }
