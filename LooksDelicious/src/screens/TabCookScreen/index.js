@@ -1,13 +1,21 @@
 import React, { Component } from 'react';
 import { Text } from 'react-native';
-import { ListItem, Left, Right, Icon } from 'native-base';
+import {
+  Container,
+  ListItem,
+  Left,
+  Right,
+  Icon,
+  Header,
+  Body,
+  Button,
+  Title,
+} from 'native-base';
 import ScrollableTabView, {
   ScrollableTabBar,
 } from 'react-native-scrollable-tab-view';
-
 // import server from '../../server';
 import { connect } from '../../redux';
-import Container from '../../components/Container';
 import UI from '../../UI';
 
 import BakingScreen from './BakingScreen';
@@ -34,10 +42,6 @@ import VegetarianDishScreen from './VegetarianDishScreen';
 
 @connect(['cook'])
 class TabCookScreen extends Component<{}> {
-  static navigationOptions = ({ navigation }) => ({
-    title: `${navigation.state.routeName}`,
-  });
-
   state = {};
 
   componentDidMount() {
@@ -79,6 +83,17 @@ class TabCookScreen extends Component<{}> {
   render() {
     return (
       <Container style={{ paddingBottom: 0 }}>
+        <Header>
+          <Left />
+          <Body>
+            <Title>CooK</Title>
+          </Body>
+          <Right>
+            <Button transparent>
+              <Icon name="menu" />
+            </Button>
+          </Right>
+        </Header>
         <ScrollableTabView
           renderTabBar={() => <ScrollableTabBar />}
           tabBarUnderlineStyle={{

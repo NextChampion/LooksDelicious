@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import PropTypes from 'prop-types';
 import Swiper from 'react-native-swiper';
-
 import { connect } from '../redux';
 import Container from '../components/Container';
 import UI from '../UI';
