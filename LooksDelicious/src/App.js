@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import SplashScreen from 'react-native-splash-screen';
 import { store, onLoadRedux, Provider } from './redux';
 
 import Navigator from './navigator';
@@ -12,6 +13,7 @@ export default class App extends Component {
   }
 
   componentDidMount() {
+    SplashScreen.hide();
     onLoadRedux(states => {
       this.setState({ loaded: true });
     });
