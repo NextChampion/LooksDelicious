@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Text } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
+import { Button, Text } from 'native-base';
 
 import UI from '../../UI';
 
@@ -26,13 +27,15 @@ export default class RecentSearch extends Component<{}> {
       return null;
     }
     return (
-      <View style={{ flex: 1, paddingHorizontal: UI.unit * 4 }}>
-        <Text>最近搜索</Text>
-        <View>
+      <View style={styles.container}>
+        <Text note style={{ marginVertical: UI.unit * 2 }}>
+          最近搜索:
+        </Text>
+        <View style={styles.buttonContainer}>
           {recent.map(a => (
-            <View key={a.get('key')}>
+            <Button key={a.get('key')} light style={styles.button}>
               <Text>{a.get('key')}</Text>
-            </View>
+            </Button>
           ))}
         </View>
       </View>
@@ -43,14 +46,17 @@ export default class RecentSearch extends Component<{}> {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    paddingHorizontal: UI.unit * 4,
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
+  buttonContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+  },
+  button: {
+    height: 36,
+    paddingHorizontal: UI.unit * 2,
+    marginHorizontal: UI.unit,
+    marginVertical: UI.unit,
   },
   instructions: {
     textAlign: 'center',

@@ -126,7 +126,7 @@ class SearchScreen extends Component<{}> {
 
   render() {
     return (
-      <Container style={{ paddingBottom: 0 }}>
+      <View style={{ flex: 1 }}>
         <Header
           transparent
           searchBar
@@ -138,14 +138,12 @@ class SearchScreen extends Component<{}> {
             autoFocus
             clearButtonMode="always"
             onChangeText={text => {
-              console.log(text);
               this.textInput = text.trim();
               if (!text) {
                 this.setState({ status: 'normal' });
               }
             }}
             onSubmitEditing={() => {
-              console.log('onSubmitEditing', this.textInput);
               this.serachWithKey(this.textInput);
             }}
           />
@@ -159,8 +157,10 @@ class SearchScreen extends Component<{}> {
             <Text>Cancel</Text>
           </Button>
         </Header>
-        {this.renderContent()}
-      </Container>
+        <Container style={{ paddingBottom: 0 }}>
+          {this.renderContent()}
+        </Container>
+      </View>
     );
   }
 }

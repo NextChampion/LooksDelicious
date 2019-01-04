@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text } from 'react-native';
+import { Text, TouchableWithoutFeedback } from 'react-native';
 import {
   Container,
   ListItem,
@@ -100,7 +100,13 @@ class TabCookScreen extends Component<{}> {
           >
             <Icon name="add" style={{ color: UI.color.primary1 }} />
           </Button>
-          <SearchBar />
+          <SearchBar
+            editable={false}
+            onPress={() => {
+              console.log('111');
+              this.props.navigation.navigate('search');
+            }}
+          />
           <Button
             transparent
             onPress={() => {

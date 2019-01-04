@@ -28,6 +28,7 @@ const color = {
   red1: '#ed6474',
   black1: '#453E56',
   white1: '#FFFFFF',
+  gray1: '#2F405047',
   gray2: '#2F405085',
   gray9: '#1F223384',
 };
