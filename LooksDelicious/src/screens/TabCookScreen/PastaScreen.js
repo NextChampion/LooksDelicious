@@ -35,7 +35,8 @@ export default class PastaScreen extends Component<{}> {
     <DishItem
       data={item}
       onPress={() => {
-        this.props.navigation.navigate('stepList', item);
+        const { navigation } = this.props;
+        navigation.navigate('stepList', item);
       }}
     />
   );
