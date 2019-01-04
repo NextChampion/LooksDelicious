@@ -44,7 +44,7 @@ import VegetarianDishScreen from './VegetarianDishScreen';
   自制调味料: Homemade seasoning
 */
 
-@connect(['cook'])
+@connect(['cook', 'dishes'])
 class TabCookScreen extends Component<{}> {
   componentDidMount() {
     // this.onRefresh();

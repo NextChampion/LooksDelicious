@@ -12,24 +12,22 @@ export const version = {
   },
 };
 
-export const counter = {
-  default: Immutable.fromJS({
-    count: 0,
-  }),
+export const dishes = {
+  default: Immutable.fromJS({}),
+  persist: true,
   actions: {
-    INCREMENT: {
-      reducer: state => {
-        const count = state.get('count');
-        const newCount = count + 1;
-        return state.merge({ count: newCount });
+    UPDATE_DISHES_WITH_ID: {
+      inputs: ['id', 'list'],
+      reducer: (state, { payload }) => {
+        console.log(state, payload);
+        return state.mergeIn([payload.id], {
+          list: payload.list,
+          updatedAt: Date.now(),
+        });
       },
     },
-    DECREMENT: {
-      reducer: state => {
-        const count = state.get('count');
-        const newCount = count - 1;
-        return state.merge({ count: newCount });
-      },
+    CLEAR_DISHES: {
+      reducer: () => Immutable.fromJS({}),
     },
   },
 };
