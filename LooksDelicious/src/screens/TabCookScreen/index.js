@@ -8,6 +8,7 @@ import ScrollableTabView, {
 import server from '../../server';
 import { dispatch, connect } from '../../redux';
 import Container from '../../components/Container';
+import UI from '../../UI';
 
 import BakingScreen from './BakingScreen';
 import ColdDishScreen from './ColdDishScreen';
@@ -86,16 +87,27 @@ class TabCookScreen extends Component<{}> {
     const { refreshing } = this.state;
     return (
       <Container style={{ paddingBottom: 0 }}>
-        <ScrollableTabView renderTabBar={() => <ScrollableTabBar />}>
-          <HomeCookingScreen tabLabel="家常菜" />
-          <FastFoodScreen tabLabel="快手菜" />
-          <CreativeCuisineScreen tabLabel="创意菜" />
-          <VegetarianDishScreen tabLabel="素菜" />
-          <ColdDishScreen tabLabel="凉菜" />
-          <BakingScreen tabLabel="烘焙" />
-          <PastaScreen tabLabel="面食" />
-          <SoupScreen tabLabel="汤" />
-          <HomemadeSeasoningScreen tabLabel="调味料" />
+        <ScrollableTabView
+          renderTabBar={() => <ScrollableTabBar />}
+          tabBarUnderlineStyle={{
+            backgroundColor: UI.color.primary1,
+            borderTopLeftRadius: 5,
+            borderTopRightRadius: 5,
+          }}
+          tabBarTextStyle={{
+            fontSize: UI.fontSize.regular,
+            color: UI.color.primary1,
+          }}
+        >
+          <HomeCookingScreen tabLabel="家常菜" id={1} {...this.props} />
+          <FastFoodScreen tabLabel="快手菜" id={2} {...this.props} />
+          <CreativeCuisineScreen tabLabel="创意菜" id={3} {...this.props} />
+          <VegetarianDishScreen tabLabel="素菜" id={4} {...this.props} />
+          <ColdDishScreen tabLabel="凉菜" id={5} {...this.props} />
+          <BakingScreen tabLabel="烘焙" id={6} {...this.props} />
+          <PastaScreen tabLabel="面食" id={7} {...this.props} />
+          <SoupScreen tabLabel="汤" id={8} {...this.props} />
+          <HomemadeSeasoningScreen tabLabel="调味料" id={9} {...this.props} />
         </ScrollableTabView>
       </Container>
     );

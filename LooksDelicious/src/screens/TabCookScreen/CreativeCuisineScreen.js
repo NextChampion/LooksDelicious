@@ -1,13 +1,64 @@
 import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, View } from 'react-native';
+import { FlatList, StyleSheet, View } from 'react-native';
 
-export default class CreativeCuisineScreen extends Component<Props> {
+import Loading from '../components/Loading';
+import Container from '../../components/Container';
+import DishItem from './components/DishItem';
+import server from '../../server';
+
+export default class CreativeCuisineScreen extends Component<{}> {
+  state = {
+    data: null,
+    loaded: false,
+  };
+
+  componentDidMount() {
+    this.getData();
+  }
+
+  getData = async () => {
+    const { id } = this.props;
+    this.setState({ loaded: false });
+    let response;
+    try {
+      response = await server.getDataOfTag(id);
+    } catch (e) {
+      this.setState({ loaded: true });
+    }
+    this.setState({
+      loaded: true,
+      data: response.result.data,
+    });
+  };
+
+  renderItem = ({ item }) => (
+    <DishItem
+      data={item}
+      onPress={() => {
+        this.props.navigation.navigate('stepList', item);
+      }}
+    />
+  );
+
   render() {
+    const { loaded, data } = this.state;
+    if (!loaded) {
+      return (
+        <View
+          style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}
+        >
+          <Loading />
+        </View>
+      );
+    }
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to React Native!</Text>
-        <Text style={styles.instructions}>TabIndexTwo</Text>
-      </View>
+      <Container style={{ paddingBottom: 0 }}>
+        <FlatList
+          data={data || []}
+          keyExtractor={item => item.id}
+          renderItem={this.renderItem}
+        />
+      </Container>
     );
   }
 }
