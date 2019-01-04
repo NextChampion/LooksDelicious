@@ -10,6 +10,8 @@ import {
   Body,
   Button,
   Title,
+  Item,
+  Input,
 } from 'native-base';
 import ScrollableTabView, {
   ScrollableTabBar,
@@ -17,6 +19,8 @@ import ScrollableTabView, {
 // import server from '../../server';
 import { connect } from '../../redux';
 import UI from '../../UI';
+
+import SearchBar from './components/SearchBar';
 
 import BakingScreen from './BakingScreen';
 import ColdDishScreen from './ColdDishScreen';
@@ -42,8 +46,6 @@ import VegetarianDishScreen from './VegetarianDishScreen';
 
 @connect(['cook'])
 class TabCookScreen extends Component<{}> {
-  state = {};
-
   componentDidMount() {
     // this.onRefresh();
   }
@@ -81,21 +83,41 @@ class TabCookScreen extends Component<{}> {
   );
 
   render() {
+    console.log('props', this.props);
     return (
       <Container style={{ paddingBottom: 0 }}>
-        <Header>
-          <Left />
-          <Body>
-            <Title>CooK</Title>
-          </Body>
-          <Right>
-            <Button transparent>
-              <Icon name="menu" />
-            </Button>
-          </Right>
+        <Header
+          transparent
+          searchBar
+          rounded
+          // style={{ backgroundColor: UI.color.primary1 }}
+        >
+          <Button
+            transparent
+            onPress={() => {
+              console.log('222');
+            }}
+          >
+            <Icon name="add" style={{ color: UI.color.primary1 }} />
+          </Button>
+          <SearchBar />
+          <Button
+            transparent
+            onPress={() => {
+              console.log('111');
+              this.props.navigation.navigate('search');
+            }}
+          >
+            <Icon name="menu" style={{ color: UI.color.primary1 }} />
+          </Button>
         </Header>
         <ScrollableTabView
-          renderTabBar={() => <ScrollableTabBar />}
+          renderTabBar={() => (
+            <ScrollableTabBar
+              tabStyle={{ height: 40 }}
+              style={{ borderWidth: 0, height: 40 }}
+            />
+          )}
           tabBarUnderlineStyle={{
             backgroundColor: UI.color.primary1,
             borderTopLeftRadius: 5,
