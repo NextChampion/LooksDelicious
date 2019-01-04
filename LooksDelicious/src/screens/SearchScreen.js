@@ -33,28 +33,7 @@ class SearchScreen extends Component<{}> {
 
   textInput = '';
 
-  componentDidMount() {
-    const { search } = this.props;
-
-    console.log('search.props', this.props);
-    console.log('search recent', search.get('recent').toArray());
-    // this.onRefresh();
-  }
-
-  // onRefresh = async () => {
-  //   this.setState({ refreshing: true });
-  //   let response;
-  //   try {
-  //     response = await server.getAllTags();
-  //   } catch (e) {
-  //     this.setState({ refreshing: false });
-  //   }
-  //   dispatch('UPDATE_COOK', response.result);
-  //   this.setState({
-  //     refreshing: false,
-  //     data: response.result,
-  //   });
-  // };
+  componentDidMount() {}
 
   serachWithKey = async key => {
     if (!key) {
@@ -70,7 +49,6 @@ class SearchScreen extends Component<{}> {
     } catch (e) {
       console.log('eeeee', e);
     }
-    console.log('result 1111', result);
     if (result.resultcode === '200') {
       this.setState({
         data: result.result.data,
@@ -105,7 +83,6 @@ class SearchScreen extends Component<{}> {
     const { search } = this.props;
     const { data, status } = this.state;
     const recent = search.get('recent').toArray();
-    console.log('recent', recent);
     if (status === 'loading') {
       return <Loading />;
     }
@@ -150,7 +127,6 @@ class SearchScreen extends Component<{}> {
           <Button
             transparent
             onPress={() => {
-              console.log('111');
               this.props.navigation.navigate('main');
             }}
           >

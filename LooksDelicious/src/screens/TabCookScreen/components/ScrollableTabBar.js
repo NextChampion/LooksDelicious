@@ -53,7 +53,6 @@ export default class ScrollableTabBar extends Component {
 
   render() {
     const numberOfTabs = this.props.tabs.length;
-    console.log('this.props', this.props);
     const { widths, scrollValue } = this.props;
     const tabUnderlineStyle = {
       position: 'absolute',

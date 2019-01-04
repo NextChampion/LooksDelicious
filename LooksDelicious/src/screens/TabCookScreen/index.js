@@ -83,15 +83,9 @@ class TabCookScreen extends Component<{}> {
   );
 
   render() {
-    console.log('props', this.props);
     return (
       <Container style={{ paddingBottom: 0 }}>
-        <Header
-          transparent
-          searchBar
-          rounded
-          // style={{ backgroundColor: UI.color.primary1 }}
-        >
+        <Header transparent searchBar rounded>
           <Button
             transparent
             onPress={() => {
@@ -103,7 +97,6 @@ class TabCookScreen extends Component<{}> {
           <SearchBar
             editable={false}
             onPress={() => {
-              console.log('111');
               this.props.navigation.navigate('search');
             }}
           />
@@ -111,7 +104,6 @@ class TabCookScreen extends Component<{}> {
             transparent
             onPress={() => {
               console.log('111');
-              this.props.navigation.navigate('search');
             }}
           >
             <Icon name="menu" style={{ color: UI.color.primary1 }} />

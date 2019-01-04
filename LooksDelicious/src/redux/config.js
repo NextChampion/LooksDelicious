@@ -18,13 +18,11 @@ export const dishes = {
   actions: {
     UPDATE_DISHES_WITH_ID: {
       inputs: ['id', 'list'],
-      reducer: (state, { payload }) => {
-        console.log(state, payload);
-        return state.mergeIn([payload.id], {
+      reducer: (state, { payload }) =>
+        state.mergeIn([payload.id], {
           list: payload.list,
           updatedAt: Date.now(),
-        });
-      },
+        }),
     },
     CLEAR_DISHES: {
       reducer: () => Immutable.fromJS({}),
