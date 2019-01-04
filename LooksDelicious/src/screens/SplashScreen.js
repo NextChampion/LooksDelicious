@@ -27,7 +27,6 @@ class Splash extends Component<{}> {
   };
 
   onIndexChanged = index => {
-    console.log('onMomentumScrollEnd', index);
     if (index > 2) {
       this.setState({ showsPagination: false });
     } else {
