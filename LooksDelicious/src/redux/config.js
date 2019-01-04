@@ -49,7 +49,7 @@ export const search = {
           const list = state
             .get('recent')
             .filter((a, ind) => a.get('key') !== payload.key && ind < 10);
-          return state.setIn('recent', list.unshift(Immutable.fromJS(payload)));
+          return state.set('recent', list.unshift(Immutable.fromJS(payload)));
         }
         const list = state.get('recent').filter((a, ind) => ind < 10);
         return state.set('recent', list.unshift(Immutable.fromJS(payload)));
