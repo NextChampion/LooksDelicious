@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Text, FlatList, View } from 'react-native';
 import {
-  Container,
   ListItem,
   Left,
   Right,
@@ -18,13 +17,17 @@ import server from '../server';
 import { dispatch, connect } from '../redux';
 import UI from '../UI';
 
+import Container from './components/Container';
 import SearchBar from './TabCookScreen/components/SearchBar';
 import DishItem from './TabCookScreen/components/DishItem';
 import RecentSearch from './components/RecentSearch';
+import Loading from './components/Loading';
+import ErrorView from './components/ErrorView';
 
 @connect(['search'])
 class SearchScreen extends Component<{}> {
   state = {
+    status: 'normal', // 'searching', 'loaded', 'error'
     data: [],
   };
 
@@ -57,6 +60,9 @@ class SearchScreen extends Component<{}> {
     if (!key) {
       return;
     }
+    this.setState({
+      status: 'loading',
+    });
     let result;
     dispatch('ADD_RECENT_SEARCK_KEY', { key });
     try {
@@ -64,10 +70,17 @@ class SearchScreen extends Component<{}> {
     } catch (e) {
       console.log('eeeee', e);
     }
-    this.setState({
-      data: result.result.data,
-    });
-    console.log('result', result.result.data);
+    console.log('result 1111', result);
+    if (result.resultcode === '200') {
+      this.setState({
+        data: result.result.data,
+        status: 'loaded',
+      });
+    } else {
+      this.setState({
+        status: 'error',
+      });
+    }
   };
 
   //   albums: ["http://juheimg.oss-cn-hangzhou.aliyuncs.com/cookbook/t/0/28_164761.jpg"]
@@ -90,10 +103,16 @@ class SearchScreen extends Component<{}> {
 
   renderContent = () => {
     const { search } = this.props;
-    const { data } = this.state;
+    const { data, status } = this.state;
     const recent = search.get('recent').toArray();
     console.log('recent', recent);
-    if (data.length) {
+    if (status === 'loading') {
+      return <Loading />;
+    }
+    if (status === 'error') {
+      return <ErrorView />;
+    }
+    if (status === 'loaded') {
       return (
         <FlatList
           data={data || []}
@@ -117,10 +136,13 @@ class SearchScreen extends Component<{}> {
           <SearchBar
             spellCheck={false}
             autoFocus
-            clearButtonMode="while-editing"
+            clearButtonMode="always"
             onChangeText={text => {
               console.log(text);
               this.textInput = text.trim();
+              if (!text) {
+                this.setState({ status: 'normal' });
+              }
             }}
             onSubmitEditing={() => {
               console.log('onSubmitEditing', this.textInput);
