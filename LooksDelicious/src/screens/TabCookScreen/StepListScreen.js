@@ -1,6 +1,17 @@
 import React, { Component } from 'react';
 import { StyleSheet, Image, FlatList } from 'react-native';
-import { CardItem, Card, Body, Text } from 'native-base';
+import {
+  CardItem,
+  Card,
+  Body,
+  Text,
+  Header,
+  Left,
+  Right,
+  Button,
+  Icon,
+  Title,
+} from 'native-base';
 
 import Container from '../../components/Container';
 import StepItem from './components/StepItem';
@@ -53,6 +64,22 @@ export default class DishListScreen extends Component<{}> {
     const { steps } = this.props.navigation.state.params;
     return (
       <Container style={{ paddingBottom: 0 }}>
+        <Header>
+          <Left>
+            <Button
+              transparent
+              onPress={() => {
+                this.props.navigation.goBack();
+              }}
+            >
+              <Icon name="arrow-back" />
+            </Button>
+          </Left>
+          <Body>
+            <Title>Header</Title>
+          </Body>
+          <Right />
+        </Header>
         <FlatList
           data={steps || []}
           keyExtractor={item => item.img}

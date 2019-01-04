@@ -2,15 +2,15 @@ import React from 'react';
 import { createBottomTabNavigator } from 'react-navigation';
 import { Image } from 'react-native';
 import TabCookScreen from '../screens/TabCookScreen';
-import TabIndexTwo from '../screens/TabIndexTwo';
-import TabIndexThree from '../screens/TabIndexThree';
+import TabGiftScreen from '../screens/TabGiftScreen';
+import TabMineScreen from '../screens/TabMineScreen';
 import UI from '../UI';
 
 const TabNavigator = createBottomTabNavigator(
   {
     Cook: TabCookScreen,
-    Gift: TabIndexTwo,
-    Mine: TabIndexThree,
+    Gift: TabGiftScreen,
+    Mine: TabMineScreen,
   },
   {
     defaultNavigationOptions: ({ navigation }) => ({

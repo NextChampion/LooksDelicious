@@ -1,12 +1,18 @@
 import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
+import { Header, Left, Body, Right, Button, Icon, Title } from 'native-base';
 
-export default class TabIndexTwo extends Component<Props> {
+export default class TabGiftScreen extends Component<Props> {
   render() {
     return (
-      <View style={styles.container}>
+      <View>
+        <Header transparent>
+          <Body>
+            <Title>Gift</Title>
+          </Body>
+        </Header>
         <Text style={styles.welcome}>Welcome to React Native!</Text>
-        <Text style={styles.instructions}>TabIndexTwo</Text>
+        <Text style={styles.instructions}>TabGiftScreen</Text>
       </View>
     );
   }
