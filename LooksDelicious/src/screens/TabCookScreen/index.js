@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, FlatList } from 'react-native';
+import { Text } from 'react-native';
 import { ListItem, Left, Right, Icon } from 'native-base';
 import ScrollableTabView, {
   ScrollableTabBar,
 } from 'react-native-scrollable-tab-view';
 
-import server from '../../server';
-import { dispatch, connect } from '../../redux';
+// import server from '../../server';
+import { connect } from '../../redux';
 import Container from '../../components/Container';
 import UI from '../../UI';
 
@@ -38,38 +38,34 @@ class TabCookScreen extends Component<{}> {
     title: `${navigation.state.routeName}`,
   });
 
-  state = {
-    refreshing: false,
-    data: [],
-  };
+  state = {};
 
   componentDidMount() {
     // this.onRefresh();
   }
 
-  onStart = () => {
-    this.props.navigation.navigate('tabOneSecond');
-  };
-
-  onRefresh = async () => {
-    this.setState({ refreshing: true });
-    let response;
-    try {
-      response = await server.getAllTags();
-    } catch (e) {
-      this.setState({ refreshing: false });
-    }
-    dispatch('UPDATE_COOK', response.result);
-    this.setState({
-      refreshing: false,
-      data: response.result,
-    });
-  };
+  // onRefresh = async () => {
+  //   this.setState({ refreshing: true });
+  //   let response;
+  //   try {
+  //     response = await server.getAllTags();
+  //   } catch (e) {
+  //     this.setState({ refreshing: false });
+  //   }
+  //   dispatch('UPDATE_COOK', response.result);
+  //   this.setState({
+  //     refreshing: false,
+  //     data: response.result,
+  //   });
+  // };
 
   renderItem = ({ item }) => (
     <ListItem
       selected
-      onPress={() => this.props.navigation.navigate('cookList', item)}
+      onPress={() => {
+        const { navigation } = this.props;
+        navigation.navigate('cookList', item);
+      }}
     >
       <Left>
         <Text>{item.get('name')}</Text>
@@ -81,9 +77,6 @@ class TabCookScreen extends Component<{}> {
   );
 
   render() {
-    const { cook } = this.props;
-    const data = cook.get('list').toArray();
-    const { refreshing } = this.state;
     return (
       <Container style={{ paddingBottom: 0 }}>
         <ScrollableTabView
@@ -110,20 +103,7 @@ class TabCookScreen extends Component<{}> {
         </ScrollableTabView>
       </Container>
     );
-    return (
-      <Container style={{ paddingBottom: 0 }}>
-        <FlatList
-          refreshing={refreshing}
-          onRefresh={this.onRefresh}
-          data={data}
-          keyExtractor={item => item.get('parentId')}
-          renderItem={this.renderItem}
-        />
-      </Container>
-    );
   }
 }
 
 export default TabCookScreen;
-
-const styles = StyleSheet.create({});
