@@ -48,10 +48,10 @@ export const search = {
         if (typeof index !== 'undefined') {
           const list = state
             .get('recent')
-            .filter((a, ind) => a.get('key') !== payload.key && ind < 10);
+            .filter((a, ind) => a.get('key') !== payload.key && ind < 9);
           return state.set('recent', list.unshift(Immutable.fromJS(payload)));
         }
-        const list = state.get('recent').filter((a, ind) => ind < 10);
+        const list = state.get('recent').filter((a, ind) => ind < 9);
         return state.set('recent', list.unshift(Immutable.fromJS(payload)));
       },
     },
