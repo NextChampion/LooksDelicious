@@ -40,7 +40,15 @@ export default class Container extends Component {
       <ScrollView
         scrollEnabled={false}
         keyboardDismissMode="on-drag"
-        style={[styles.view, !!padding && styles.padding, !!style && style]}
+        style={[
+          { flex: 1, backgroundColor: UI.color.bg1 },
+          !!bgStyle && bgStyle,
+        ]}
+        contentContainerStyle={[
+          styles.view,
+          !!padding && styles.padding,
+          !!style && style,
+        ]}
       >
         {children}
       </ScrollView>
