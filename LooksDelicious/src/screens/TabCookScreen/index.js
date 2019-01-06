@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, TouchableWithoutFeedback } from 'react-native';
+import { Text, TouchableOpacity } from 'react-native';
 import {
   Container,
   ListItem,
@@ -86,14 +86,15 @@ class TabCookScreen extends Component<{}> {
     return (
       <Container style={{ paddingBottom: 0 }}>
         <Header transparent searchBar rounded>
-          <Button
-            transparent
-            onPress={() => {
-              console.log('222');
+          <TouchableOpacity
+            style={{
+              width: 44,
+              paddingHorizontal: UI.unit * 2,
+              justifyContent: 'center',
             }}
           >
-            <Icon name="add" style={{ color: UI.color.primary1 }} />
-          </Button>
+            <Icon name="arrow-back" style={{ color: UI.color.primary1 }} />
+          </TouchableOpacity>
           <SearchBar
             editable={false}
             onPress={() => {

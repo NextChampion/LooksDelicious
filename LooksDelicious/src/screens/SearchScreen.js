@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, FlatList, View } from 'react-native';
+import { Text, FlatList, View, TouchableOpacity } from 'react-native';
 import {
   ListItem,
   Left,
@@ -74,7 +74,8 @@ class SearchScreen extends Component<{}> {
     <DishItem
       data={item}
       onPress={() => {
-        this.props.navigation.navigate('stepList', item);
+        const { navigation } = this.props;
+        navigation.navigate('stepList', item);
       }}
     />
   );
@@ -102,6 +103,7 @@ class SearchScreen extends Component<{}> {
   };
 
   render() {
+    const { navigation } = this.props;
     return (
       <View style={{ flex: 1 }}>
         <Header
@@ -110,6 +112,18 @@ class SearchScreen extends Component<{}> {
           rounded
           // style={{ backgroundColor: UI.color.primary1 }}
         >
+          <TouchableOpacity
+            style={{
+              width: 44,
+              paddingHorizontal: UI.unit * 2,
+              justifyContent: 'center',
+            }}
+            onPress={() => {
+              navigation.navigate('main');
+            }}
+          >
+            <Icon name="arrow-back" style={{ color: UI.color.primary1 }} />
+          </TouchableOpacity>
           <SearchBar
             spellCheck={false}
             autoFocus
@@ -127,7 +141,7 @@ class SearchScreen extends Component<{}> {
           <Button
             transparent
             onPress={() => {
-              this.props.navigation.navigate('main');
+              navigation.navigate('main');
             }}
           >
             <Text>Cancel</Text>
