@@ -1,9 +1,18 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, FlatList } from 'react-native';
+import {
+  StyleSheet,
+  View,
+  FlatList,
+  TouchableOpacity,
+  findNodeHandle,
+} from 'react-native';
 import { Icon, ListItem, Left, Right, Text } from 'native-base';
+import { UIManager } from 'NativeModules';
 import PropTypes from 'prop-types';
 
 import UI from '../../../UI';
+
+const LEFT_ITEM_HEIGHT = 40;
 
 export default class SecondaryMenuBar extends Component {
   static propTypes = {
@@ -45,8 +54,7 @@ export default class SecondaryMenuBar extends Component {
   };
 
   renderLeftItem = ({ item, index }) => (
-    <ListItem
-      noIndent
+    <TouchableOpacity
       onPress={() => {
         this.defaultData.forEach((data, ind) => {
           if (ind === index) {
@@ -57,13 +65,29 @@ export default class SecondaryMenuBar extends Component {
         });
         this.leftIndex = index;
         this.getData(this.defaultData);
-      }}
-      style={{
-        backgroundColor: index === this.leftIndex ? UI.color.bg1 : UI.color.bg2,
+        const count = this.defaultData.length - index;
+        const height = count * LEFT_ITEM_HEIGHT;
+        const maxCount = parseInt(this.height / LEFT_ITEM_HEIGHT);
+        const offset = this.height - maxCount * LEFT_ITEM_HEIGHT;
+        if (height > this.height) {
+          this.left.scrollToIndex({ viewOffset: 0, index });
+        } else {
+          this.left.scrollToIndex({ viewOffset: offset, index: maxCount });
+        }
       }}
     >
-      <Text>{item.name}</Text>
-    </ListItem>
+      <View
+        style={[
+          styles.leftItem,
+          {
+            backgroundColor:
+              index === this.leftIndex ? UI.color.bg1 : UI.color.bg2,
+          },
+        ]}
+      >
+        <Text>{item.name}</Text>
+      </View>
+    </TouchableOpacity>
   );
 
   renderRightItem = ({ item }) => {
@@ -73,9 +97,6 @@ export default class SecondaryMenuBar extends Component {
         <Left>
           <Text>{item.name}</Text>
         </Left>
-        <Right>
-          <Icon name="arrow-forward" />
-        </Right>
       </ListItem>
     );
   };
@@ -85,10 +106,24 @@ export default class SecondaryMenuBar extends Component {
     return (
       <View style={{ flex: 1, flexDirection: 'row' }}>
         <FlatList
+          ref={a => (this.left = a)}
           style={styles.left}
           data={leftData || []}
+          initialNumToRender={18}
           keyExtractor={item => item.parentId}
           renderItem={this.renderLeftItem}
+          getItemLayout={(param, index) => ({
+            length: LEFT_ITEM_HEIGHT,
+            offset: LEFT_ITEM_HEIGHT * index,
+            index,
+          })}
+          onLayout={() => {
+            const handle = findNodeHandle(this.left);
+            UIManager.measure(handle, (x, y, width, height, pageX, pageY) => {
+              this.height = height;
+              console.warn(x, y, width, height, pageX, pageY);
+            });
+          }}
         />
         <FlatList
           style={styles.right}
@@ -109,6 +144,12 @@ const styles = StyleSheet.create({
   },
   left: {
     width: leftWidth,
+  },
+  leftItem: {
+    borderWidth: 0,
+    height: LEFT_ITEM_HEIGHT,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   right: {
     width: UI.size.screenWidth - leftWidth,
