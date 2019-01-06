@@ -54,6 +54,21 @@ export default class SecondaryMenuBar extends Component {
     });
   };
 
+  scrollToIndex = index => {
+    const lastCount = this.defaultData.length - index;
+    const lastHeight = lastCount * LEFT_ITEM_HEIGHT;
+    const maxCount = Math.floor(this.height / LEFT_ITEM_HEIGHT);
+    const offset = this.height - maxCount * LEFT_ITEM_HEIGHT;
+    if (lastHeight > this.height) {
+      this.left.scrollToIndex({ index });
+    } else {
+      this.left.scrollToIndex({
+        viewOffset: offset,
+        index: this.defaultData.length - maxCount,
+      });
+    }
+  };
+
   renderLeftItem = ({ item, index }) => (
     <TouchableOpacity
       onPress={() => {
@@ -66,15 +81,7 @@ export default class SecondaryMenuBar extends Component {
         });
         this.leftIndex = index;
         this.getData(this.defaultData);
-        const count = this.defaultData.length - index;
-        const height = count * LEFT_ITEM_HEIGHT;
-        const maxCount = parseInt(this.height / LEFT_ITEM_HEIGHT);
-        const offset = this.height - maxCount * LEFT_ITEM_HEIGHT;
-        if (height > this.height) {
-          this.left.scrollToIndex({ viewOffset: 0, index });
-        } else {
-          this.left.scrollToIndex({ viewOffset: offset, index: maxCount });
-        }
+        this.scrollToIndex(index);
       }}
     >
       <View
