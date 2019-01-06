@@ -13,6 +13,7 @@ import PropTypes from 'prop-types';
 import UI from '../../../UI';
 
 const LEFT_ITEM_HEIGHT = 40;
+const leftWidth = 100;
 
 export default class SecondaryMenuBar extends Component {
   static propTypes = {
@@ -136,7 +137,6 @@ export default class SecondaryMenuBar extends Component {
   }
 }
 
-const leftWidth = 100;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
