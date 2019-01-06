@@ -8,12 +8,12 @@ import UI from '../../UI';
 export default class RecentSearch extends Component<{}> {
   static propTypes = {
     recent: PropTypes.array,
-    onPress: PropTypes.func,
+    onItemPress: PropTypes.func,
   };
 
   static defaultProps = {
     recent: [],
-    onPress: null,
+    onItemPress: null,
   };
 
   shouldComponentUpdate(props) {
@@ -22,7 +22,7 @@ export default class RecentSearch extends Component<{}> {
   }
 
   render() {
-    const { recent } = this.props;
+    const { recent, onItemPress } = this.props;
     if (!recent.length) {
       return null;
     }
@@ -33,7 +33,12 @@ export default class RecentSearch extends Component<{}> {
         </Text>
         <View style={styles.buttonContainer}>
           {recent.map(a => (
-            <Button key={a.get('key')} light style={styles.button}>
+            <Button
+              key={a.get('key')}
+              onPress={() => onItemPress(a.get('key'))}
+              light
+              style={styles.button}
+            >
               <Text>{a.get('key')}</Text>
             </Button>
           ))}

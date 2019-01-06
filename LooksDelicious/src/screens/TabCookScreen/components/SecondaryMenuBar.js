@@ -93,7 +93,13 @@ export default class SecondaryMenuBar extends Component {
           },
         ]}
       >
-        <Text>{item.name}</Text>
+        <Text
+          style={
+            index === this.leftIndex ? styles.leftTextSelected : styles.leftText
+          }
+        >
+          {item.name}
+        </Text>
       </View>
     </TouchableOpacity>
   );
@@ -101,11 +107,9 @@ export default class SecondaryMenuBar extends Component {
   renderRightItem = ({ item }) => {
     const { onPress } = this.props;
     return (
-      <ListItem selected onPress={onPress}>
-        <Left>
-          <Text>{item.name}</Text>
-        </Left>
-      </ListItem>
+      <View style={styles.rightItem} onPress={onPress}>
+        <Text style={styles.rightText}>{item.name}</Text>
+      </View>
     );
   };
 
@@ -135,6 +139,11 @@ export default class SecondaryMenuBar extends Component {
         />
         <FlatList
           style={styles.right}
+          numColumns={2}
+          columnWrapperStyle={{
+            paddingVertical: UI.unit,
+            justifyContent: 'space-around',
+          }}
           data={rightData || []}
           keyExtractor={item => item.id}
           renderItem={this.renderRightItem}
@@ -158,8 +167,30 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  leftTextSelected: {
+    color: UI.color.primary1,
+    fontSize: 14,
+    fontWeight: '500',
+  },
+  leftText: {
+    color: UI.color.black,
+    fontSize: 14,
+  },
   right: {
     width: UI.size.screenWidth - leftWidth,
     backgroundColor: UI.color.bg1,
+  },
+  rightItem: {
+    width: 120,
+    height: 30,
+    borderWidth: StyleSheet.hairlineWidth,
+    borderRadius: 10,
+    borderColor: UI.color.border,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  rightText: {
+    color: UI.color.gray9,
+    fontSize: 14,
   },
 });

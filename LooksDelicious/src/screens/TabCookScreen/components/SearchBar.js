@@ -7,21 +7,37 @@ export default class SearchBar extends Component<{}> {
     data: PropTypes.object,
     onPress: PropTypes.func,
     editable: PropTypes.bool,
+    onChangeText: PropTypes.func,
   };
 
   static defaultProps = {
     data: {},
     onPress: null,
     editable: true,
+    onChangeText: null,
   };
 
-  shouldComponentUpdate(props) {
+  state = {
+    value: this.props.value,
+  };
+
+  shouldComponentUpdate(props, state) {
     const { data } = this.props;
-    return data.id !== props.data.id;
+    const { value } = this.state;
+    return data.id !== props.data.id || value !== state.value;
   }
 
+  setValue = value => {
+    this.setState({ value: ' ' }, () => {
+      setTimeout(() => {
+        this.setState({ value });
+      }, 20);
+    });
+  };
+
   render() {
-    const { data, onPress, editable, ...others } = this.props;
+    const { data, onPress, editable, onChangeText, ...others } = this.props;
+    const { value } = this.state;
     if (!editable) {
       return (
         <Item onPress={onPress}>
@@ -33,7 +49,18 @@ export default class SearchBar extends Component<{}> {
     return (
       <Item>
         <Icon name="ios-search" />
-        <Input placeholder="Search" {...others} />
+        <Input
+          placeholder="Search"
+          {...others}
+          value={value}
+          onChangeText={text => {
+            this.value = text;
+            if (onChangeText) {
+              onChangeText(text);
+            }
+            this.setState({ value: text });
+          }}
+        />
       </Item>
     );
   }

@@ -1,17 +1,6 @@
 import React, { Component } from 'react';
 import { Text, FlatList, View, TouchableOpacity } from 'react-native';
-import {
-  ListItem,
-  Left,
-  Right,
-  Icon,
-  Header,
-  Body,
-  Button,
-  Title,
-  Item,
-  Input,
-} from 'native-base';
+import { Icon, Header, Button } from 'native-base';
 
 import server from '../server';
 import { dispatch, connect } from '../redux';
@@ -99,19 +88,22 @@ class SearchScreen extends Component<{}> {
         />
       );
     }
-    return <RecentSearch recent={recent} />;
+    return (
+      <RecentSearch
+        recent={recent}
+        onItemPress={a => {
+          this.searchBar.setValue(a);
+          this.serachWithKey(a);
+        }}
+      />
+    );
   };
 
   render() {
     const { navigation } = this.props;
     return (
       <View style={{ flex: 1 }}>
-        <Header
-          transparent
-          searchBar
-          rounded
-          // style={{ backgroundColor: UI.color.primary1 }}
-        >
+        <Header transparent searchBar rounded>
           <TouchableOpacity
             style={{
               width: 44,
@@ -126,6 +118,7 @@ class SearchScreen extends Component<{}> {
           </TouchableOpacity>
           <SearchBar
             spellCheck={false}
+            ref={a => (this.searchBar = a)}
             autoFocus
             clearButtonMode="always"
             onChangeText={text => {
