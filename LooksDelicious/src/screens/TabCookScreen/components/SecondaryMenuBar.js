@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   findNodeHandle,
 } from 'react-native';
-import { Icon, ListItem, Left, Right, Text } from 'native-base';
+import { ListItem, Left, Text } from 'native-base';
 import { UIManager } from 'NativeModules';
 import PropTypes from 'prop-types';
 
@@ -129,7 +129,6 @@ export default class SecondaryMenuBar extends Component {
             const handle = findNodeHandle(this.left);
             UIManager.measure(handle, (x, y, width, height, pageX, pageY) => {
               this.height = height;
-              console.warn(x, y, width, height, pageX, pageY);
             });
           }}
         />
