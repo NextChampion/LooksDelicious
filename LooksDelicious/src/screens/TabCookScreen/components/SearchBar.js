@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Item, Icon, Input, Text } from 'native-base';
 import PropTypes from 'prop-types';
 
+import UI from '../../../UI';
+
 export default class SearchBar extends Component<{}> {
   static propTypes = {
     data: PropTypes.object,
@@ -50,14 +52,14 @@ export default class SearchBar extends Component<{}> {
     const { value } = this.state;
     if (!editable) {
       return (
-        <Item onPress={onPress}>
+        <Item style={{ backgroundColor: UI.color.gray10 }} onPress={onPress}>
           <Icon name="ios-search" />
           <Text style={{ color: placeholderTextColor }}>{placeholder}</Text>
         </Item>
       );
     }
     return (
-      <Item>
+      <Item style={{ backgroundColor: UI.color.gray10 }}>
         <Icon name="ios-search" />
         <Input
           placeholder={placeholder}

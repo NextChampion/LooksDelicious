@@ -34,6 +34,7 @@ const color = {
   gray1: '#2F405047',
   gray2: '#2F405085',
   gray9: '#1F223384',
+  gray10: '#1F223316',
 };
 
 const size = {
