@@ -20,7 +20,10 @@ const color = {
   unselected: '#cdcdcd',
   border: '#D8D7DC',
   disable: '#E6EFFA',
+
   bg1: '#FFFFFF', // '#FCFDFF',
+  bg2: '#F5F9FD',
+
   black: '#1f2233',
   green1: '#add56b',
   yellow1: '#f9d35b',

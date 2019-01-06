@@ -17,9 +17,9 @@ import ScrollableTabView, {
   ScrollableTabBar,
 } from 'react-native-scrollable-tab-view';
 // import server from '../../server';
-import { connect } from '../../redux';
+import { connect, dispatch } from '../../redux';
 import UI from '../../UI';
-
+import server from '../../server';
 import SearchBar from './components/SearchBar';
 
 import BakingScreen from './BakingScreen';
@@ -50,20 +50,20 @@ class TabCookScreen extends Component<{}> {
     // this.onRefresh();
   }
 
-  // onRefresh = async () => {
-  //   this.setState({ refreshing: true });
-  //   let response;
-  //   try {
-  //     response = await server.getAllTags();
-  //   } catch (e) {
-  //     this.setState({ refreshing: false });
-  //   }
-  //   dispatch('UPDATE_COOK', response.result);
-  //   this.setState({
-  //     refreshing: false,
-  //     data: response.result,
-  //   });
-  // };
+  onRefresh = async () => {
+    this.setState({ refreshing: true });
+    let response;
+    try {
+      response = await server.getAllTags();
+    } catch (e) {
+      this.setState({ refreshing: false });
+    }
+    dispatch('UPDATE_COOK', response.result);
+    this.setState({
+      refreshing: false,
+      data: response.result,
+    });
+  };
 
   renderItem = ({ item }) => (
     <ListItem
@@ -83,6 +83,7 @@ class TabCookScreen extends Component<{}> {
   );
 
   render() {
+    const { navigation } = this.props;
     return (
       <Container style={{ paddingBottom: 0 }}>
         <Header transparent searchBar rounded>
@@ -98,13 +99,14 @@ class TabCookScreen extends Component<{}> {
           <SearchBar
             editable={false}
             onPress={() => {
-              this.props.navigation.navigate('search');
+              navigation.navigate('search');
             }}
           />
           <Button
             transparent
             onPress={() => {
               console.log('111');
+              navigation.navigate('allCook');
             }}
           >
             <Icon name="menu" style={{ color: UI.color.primary1 }} />
