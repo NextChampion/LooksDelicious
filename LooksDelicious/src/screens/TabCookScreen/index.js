@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, TouchableOpacity } from 'react-native';
+import { Text, View } from 'react-native';
 import {
   Container,
   ListItem,
@@ -7,11 +7,7 @@ import {
   Right,
   Icon,
   Header,
-  Body,
   Button,
-  Title,
-  Item,
-  Input,
 } from 'native-base';
 import ScrollableTabView, {
   ScrollableTabBar,
@@ -94,17 +90,26 @@ class TabCookScreen extends Component<{}> {
     return (
       <Container style={{ paddingBottom: 0 }}>
         <Header transparent searchBar rounded>
-          <TouchableOpacity
+          <View
             style={{
               width: 44,
-              paddingHorizontal: UI.unit * 2,
+              alignItems: 'center',
               justifyContent: 'center',
             }}
           >
-            <Icon name="arrow-back" style={{ color: UI.color.primary1 }} />
-          </TouchableOpacity>
+            <Text
+              style={{
+                color: UI.color.primary1,
+                fontSize: 18,
+                fontWeight: '500',
+              }}
+            >
+              LD
+            </Text>
+          </View>
           <SearchBar
             editable={false}
+            placeholderTextColor={UI.color.gray9}
             onPress={() => {
               navigation.navigate('search');
             }}
@@ -112,7 +117,6 @@ class TabCookScreen extends Component<{}> {
           <Button
             transparent
             onPress={() => {
-              console.log('111');
               navigation.navigate('allCook');
             }}
           >

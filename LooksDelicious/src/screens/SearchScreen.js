@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Text, FlatList, View, TouchableOpacity } from 'react-native';
 import { Icon, Header, Button } from 'native-base';
+import Toast, { DURATION } from 'react-native-easy-toast';
 
 import server from '../server';
 import { dispatch, connect } from '../redux';
@@ -26,6 +27,7 @@ class SearchScreen extends Component<{}> {
 
   serachWithKey = async key => {
     if (!key) {
+      this.toast.show('请输入您要搜索的内容');
       return;
     }
     this.setState({
@@ -119,6 +121,7 @@ class SearchScreen extends Component<{}> {
           <SearchBar
             spellCheck={false}
             ref={a => (this.searchBar = a)}
+            placeholderTextColor={UI.color.gray9}
             autoFocus
             clearButtonMode="always"
             onChangeText={text => {
@@ -134,15 +137,16 @@ class SearchScreen extends Component<{}> {
           <Button
             transparent
             onPress={() => {
-              navigation.navigate('main');
+              this.serachWithKey(this.textInput);
             }}
           >
-            <Text>Cancel</Text>
+            <Text>搜索</Text>
           </Button>
         </Header>
         <Container style={{ paddingBottom: 0 }}>
           {this.renderContent()}
         </Container>
+        <Toast ref={a => (this.toast = a)} />
       </View>
     );
   }
