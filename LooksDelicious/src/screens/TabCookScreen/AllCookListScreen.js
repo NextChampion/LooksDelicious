@@ -94,12 +94,6 @@ class AllCookListScreen extends Component<{}> {
           </Body>
           <Right />
         </Header>
-        <SearchBar
-          editable={false}
-          onPress={() => {
-            navigation.navigate('search');
-          }}
-        />
         <SecondaryMenuBar data={cook.get('list').toJS()} />
       </Container>
     );
