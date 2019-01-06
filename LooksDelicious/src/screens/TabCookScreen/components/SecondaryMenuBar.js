@@ -115,6 +115,7 @@ export default class SecondaryMenuBar extends Component {
       <View style={{ flex: 1, flexDirection: 'row' }}>
         <FlatList
           ref={a => (this.left = a)}
+          showsVerticalScrollIndicator={false}
           style={styles.left}
           data={leftData || []}
           initialNumToRender={18}
