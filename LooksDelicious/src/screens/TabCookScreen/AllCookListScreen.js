@@ -94,7 +94,13 @@ class AllCookListScreen extends Component<{}> {
           </Body>
           <Right />
         </Header>
-        <SecondaryMenuBar data={cook.get('list').toJS()} />
+        <SecondaryMenuBar
+          data={cook.get('list').toJS()}
+          onRightItemPress={a => {
+            navigation.navigate('dishList', a);
+            console.log('aaaa', a);
+          }}
+        />
       </Container>
     );
   }

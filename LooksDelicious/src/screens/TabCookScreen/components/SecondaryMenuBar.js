@@ -18,12 +18,12 @@ const leftWidth = 100;
 export default class SecondaryMenuBar extends Component {
   static propTypes = {
     data: PropTypes.array,
-    onPress: PropTypes.func,
+    onRightItemPress: PropTypes.func,
   };
 
   static defaultProps = {
     data: [],
-    onPress: null,
+    onRightItemPress: null,
   };
 
   state = {
@@ -105,11 +105,13 @@ export default class SecondaryMenuBar extends Component {
   );
 
   renderRightItem = ({ item }) => {
-    const { onPress } = this.props;
+    const { onRightItemPress } = this.props;
     return (
-      <View style={styles.rightItem} onPress={onPress}>
-        <Text style={styles.rightText}>{item.name}</Text>
-      </View>
+      <TouchableOpacity onPress={() => onRightItemPress(item)}>
+        <View style={styles.rightItem}>
+          <Text style={styles.rightText}>{item.name}</Text>
+        </View>
+      </TouchableOpacity>
     );
   };
 
