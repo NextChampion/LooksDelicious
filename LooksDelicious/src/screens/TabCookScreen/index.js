@@ -21,6 +21,7 @@ import { connect, dispatch } from '../../redux';
 import UI from '../../UI';
 import server from '../../server';
 import SearchBar from './components/SearchBar';
+import Loading from '../components/Loading';
 
 import BakingScreen from './BakingScreen';
 import ColdDishScreen from './ColdDishScreen';
@@ -46,8 +47,13 @@ import VegetarianDishScreen from './VegetarianDishScreen';
 
 @connect(['cook', 'dishes'])
 class TabCookScreen extends Component<{}> {
+  state = { refreshing: false };
+
   componentDidMount() {
-    // this.onRefresh();
+    const { cook } = this.props;
+    if (!cook.size) {
+      this.onRefresh();
+    }
   }
 
   onRefresh = async () => {
@@ -59,10 +65,7 @@ class TabCookScreen extends Component<{}> {
       this.setState({ refreshing: false });
     }
     dispatch('UPDATE_COOK', response.result);
-    this.setState({
-      refreshing: false,
-      data: response.result,
-    });
+    this.setState({ refreshing: false });
   };
 
   renderItem = ({ item }) => (
@@ -84,6 +87,10 @@ class TabCookScreen extends Component<{}> {
 
   render() {
     const { navigation } = this.props;
+    const { refreshing } = this.state;
+    if (refreshing) {
+      return <Loading />;
+    }
     return (
       <Container style={{ paddingBottom: 0 }}>
         <Header transparent searchBar rounded>
