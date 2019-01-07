@@ -12,6 +12,12 @@ yarn install
 ```bash
 react-native link
 ```
+--
+*如果运行失败，在项目目录下，尝试执行：*
+
+```
+yarn build:ios
+```
 
 ## Preview
 
