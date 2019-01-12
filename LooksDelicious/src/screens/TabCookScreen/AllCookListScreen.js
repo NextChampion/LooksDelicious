@@ -98,7 +98,6 @@ class AllCookListScreen extends Component<{}> {
           data={cook.get('list').toJS()}
           onRightItemPress={a => {
             navigation.navigate('dishList', a);
-            console.log('aaaa', a);
           }}
         />
       </Container>

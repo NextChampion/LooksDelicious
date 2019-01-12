@@ -75,3 +75,22 @@ export const cook = {
     },
   },
 };
+
+export const collections = {
+  default: Immutable.fromJS([]),
+  persist: true,
+  actions: {
+    CHANGE_COLLECTIONS_STATE: {
+      reducer: (state, { payload }) => {
+        const index = state.find(a => a.get('id') === payload.id);
+        if (typeof index === 'undefined') {
+          return state.push(Immutable.fromJS(payload));
+        }
+        return state.filter(a => a.get('id') !== payload.id);
+      },
+    },
+    CLEAR_COLLECTON: {
+      reducer: () => Immutable.fromJS([]),
+    },
+  },
+};

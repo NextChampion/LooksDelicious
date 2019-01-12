@@ -20,16 +20,21 @@ export default class StepItem extends Component<{}> {
   render() {
     const { data } = this.props;
     return (
-      <Card style={{ marginHorizontal: 12 }}>
-        <CardItem cardBody>
+      <Card style={{ margin: 24 }}>
+        <CardItem
+          cardBody
+          style={{ alignItems: 'center', justifyContent: 'center' }}
+        >
           <Image
             source={{ uri: data.img }}
-            style={{ height: 200, width: null, flex: 1 }}
+            style={{ height: 230, width: 300 }}
           />
         </CardItem>
         <CardItem>
           <Body>
-            <Text note>{data.step}</Text>
+            <Text style={{ marginLeft: 20 }} note>
+              {data.step}
+            </Text>
           </Body>
         </CardItem>
       </Card>
