@@ -1,38 +1,32 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { Header, Left, Body, Right, Button, Icon, Title } from 'native-base';
+import { StyleSheet, Text, View, ScrollView } from 'react-native';
+import HeaderView from './components/HeaderView';
+import ServingView from './components/ServingView';
+import IWantView from './components/IWantView';
+import Title from './components/Title';
+import CardView from './components/CardView';
+import SearchBar from './components/SearchBar';
 
-export default class TabGiftScreen extends Component<Props> {
+export default class TabGiftScreen extends Component {
   render() {
     return (
-      <View>
-        <Header transparent>
-          <Body>
-            <Title>Gift</Title>
-          </Body>
-        </Header>
-        <Text style={styles.welcome}>Welcome to React Native!</Text>
-        <Text style={styles.instructions}>TabGiftScreen</Text>
-      </View>
+      <ScrollView>
+        <HeaderView />
+        <ServingView />
+        <IWantView />
+        <Title title="杭州生活" />
+        <CardView />
+        <SearchBar style={styles.searchBar} />
+      </ScrollView>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
+  searchBar: {
+    position: 'absolute',
+    left: 0,
+    top: 165,
+    right: 0,
   },
 });
